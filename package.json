@@ -1,0 +1,22 @@
+{
+  "name": "e_commerce_app",
+  "version": "1.0.0",
+  "description": "backend for an e-commerce app",
+  "main": "index.js",
+  "type" : "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node ./src/index.js"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "Harivansh",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.1.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.2.2"
+  }
+}

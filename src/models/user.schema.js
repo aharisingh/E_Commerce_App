@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import AuthRoles from "../utils/authRoles.js"
+import bcrypt from "bcryptjs"
 
 const {Schema} =  mongoose
 
@@ -27,5 +28,20 @@ const userSchema = new Schema({
     forgotPasswordToken : String ,
     forgotPasswordExpiry : Date
 },{timeStamps : true})
+
+//encrypt the password before storing it in db
+
+userSchema.pre("save" , async function(next){
+    if(!this.isModified("password")) return next()
+   this.password =  await bcrypt.hash(this.password , 10)
+   next()
+})
+
+userSchema.methods = {
+    //compare password
+    comparePassword : async function(enteredPassword){
+        return await bcrypt.hash(enteredPassword , this.password)
+    }
+}
 
 export default mongoose.model("User" , userSchema)
